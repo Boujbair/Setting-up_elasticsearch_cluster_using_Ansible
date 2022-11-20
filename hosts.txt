@@ -1,0 +1,11 @@
+[servers]
+node1 ansible_host=10.5.2.39
+node2 ansible_host=10.5.4.217
+node3 ansible_host=10.5.3.61
+
+[elk_master_nodes]
+node1
+[elk_data_nodes]
+node2
+node3
+

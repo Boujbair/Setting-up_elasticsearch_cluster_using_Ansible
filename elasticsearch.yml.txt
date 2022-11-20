@@ -1,0 +1,66 @@
+- hosts: elk_master_nodes
+  roles:
+    - role: elastic.elasticsearch
+  vars:
+    es_version: 7.10.0
+    es_enable_xpack: false
+    es_data_dirs:
+      - "/data/elasticsearch/data"
+    es_log_dir: "/data/elasticsearch/logs"
+    es_java_install: true
+    es_heap_size: "1g"
+    es_config:
+      cluster.name: "Boujbair_es_cluster"
+      cluster.initial_master_nodes: ["10.5.2.39:9300"]
+      discovery.seed_hosts: ["10.5.2.39:9300","10.5.4.217:9300","10.5.3.61:9300"]
+      http.port: 9200
+      node.data: false
+      node.master: true
+      bootstrap.memory_lock: false
+      network.host: '0.0.0.0'
+    es_plugins:
+     - plugin: ingest-attachment
+
+- hosts: elk_data_nodes
+  roles:
+    - role: elastic.elasticsearch
+  vars:
+    es_version: 7.10.0
+    es_enable_xpack: false
+    es_data_dirs:
+      - "/data/elasticsearch/data"
+    es_log_dir: "/data/elasticsearch/logs"
+    es_java_install: true
+    es_config:
+      cluster.name: "Boujbair_es_cluster"
+      cluster.initial_master_nodes: ["10.5.2.39:9300"]
+      discovery.seed_hosts: ["10.5.2.39:9300","10.5.4.217:9300","10.5.3.61:9300"]
+      http.port: 9200
+      node.data: true
+      node.master: false
+      bootstrap.memory_lock: false
+     network.host: '0.0.0.0'
+    es_plugins:
+      - plugin: ingest-attachment
+
+- hosts: elk_data_nodes
+  roles:
+    - role: elastic.elasticsearch
+  vars:
+    es_version: 7.10.0
+    es_enable_xpack: false
+    es_data_dirs:
+      - "/data/elasticsearch/data"
+    es_log_dir: "/data/elasticsearch/logs"
+    es_java_install: true
+    es_config:
+      cluster.name: "Boujbair_es_cluster"
+      cluster.initial_master_nodes: ["10.5.2.39:9300"]
+      discovery.seed_hosts: ["10.5.2.39:9300","10.5.4.217:9300","10.5.3.61:9300"]
+      http.port: 9200
+      node.data: true
+      node.master: false
+      bootstrap.memory_lock: false
+      network.host: '0.0.0.0'
+    es_plugins:
+      - plugin: ingest-attachment
